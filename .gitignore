@@ -39,3 +39,4 @@ wrangler.toml
 .netlify
 
 package-lock.json
+.env
