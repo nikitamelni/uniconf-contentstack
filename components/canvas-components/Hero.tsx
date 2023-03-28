@@ -5,21 +5,20 @@ import {
 } from "@uniformdev/canvas-react";
 import Splitter from "../atoms/Splitter";
 
-type HeroProps = ComponentProps<{
-  title: string;
-  text: string;
-  buttonText: string;
-  buttonLink: string;
-  image?: string;
-}>;
+export type EntryProps = {
+	title: string;
+	text: string;
+	buttonText?: string;
+	buttonLink?: string;
+	image?: string;
+};
 
-export function Hero({
-  title,
-  text,
-  buttonText,
-  image,
-  buttonLink,
-}: HeroProps) {
+export type HeroProps = {
+	heroDatasource: EntryProps;
+};
+
+export function Hero(props: HeroProps) {
+  console.log('looooog = ' + JSON.stringify(props));
   return (
     <>
       <div className="pt-24">
@@ -30,27 +29,27 @@ export function Hero({
             </p>
             <h1
               className="my-4 text-5xl font-bold leading-tight"
-              dangerouslySetInnerHTML={{ __html: title }}
+              dangerouslySetInnerHTML={{ __html: props?.heroDatasource?.title }}
             />
             <p
               className="leading-normal text-2xl mb-8"
-              dangerouslySetInnerHTML={{ __html: text }}
+              dangerouslySetInnerHTML={{ __html: props?.heroDatasource?.text }}
             />
-            {buttonText ? (
-              <Link prefetch={false} href={buttonLink ? buttonLink : "#"}>
+            {props?.heroDatasource?.buttonText ? (
+              <Link prefetch={false} href={props?.heroDatasource?.buttonLink ? props?.heroDatasource?.buttonLink : "#"}>
                 <button className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg">
-                  {buttonText}
+                  {props?.heroDatasource?.buttonText}
                 </button>
               </Link>
             ) : null}
           </div>
           <div className="w-full md:w-3/5 py-6 text-center">
-            {image && (
+            {props?.heroDatasource?.image && (
               <img
                 className="w-full md:w-4/5 z-50 min-h-500 max-h-500"
                 height={500}
-                src={image}
-                alt={buttonText}
+                src={props?.heroDatasource?.image}
+                alt={props?.heroDatasource?.buttonText}
               />
             )}
           </div>
